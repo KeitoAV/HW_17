@@ -89,7 +89,7 @@ class MoviesView(Resource):
     def post(self):
 
         movie = movie_schema.load(request.json)  # ??
-        # request.json - падает с ошибкой, request.args - добавляет (null) пустые поля
+
         db.session.add(models.Movie(**movie))
 
         db.session.commit()
@@ -143,7 +143,7 @@ class DirectorsView(Resource):
     @directors_ns.expect(api.models['director'])
     @directors_ns.response(200, description='Режиссер успешно добавлен.')
     def post(self):
-        director = director_schema.load(request.args)  # ??
+        director = director_schema.load(request.json)  # ??
 
         db.session.add(models.Director(**director))
 
@@ -197,7 +197,7 @@ class GenresView(Resource):
     @genres_ns.expect(api.models['genre'])
     @genres_ns.response(200, description='Жанр успешно добавлен.')
     def post(self):
-        genre = genre_schema.load(request.args)  # ??
+        genre = genre_schema.load(request.json)  # ??
 
         db.session.add(models.Genre(**genre))
 
